@@ -1,7 +1,7 @@
 // import logo from "./logo.svg";
 // import "./App.css";
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // `https://api.frankfurter.app/latest?amount=100&from=EUR&to=USD`
 export default function App() {
@@ -33,6 +33,10 @@ export default function App() {
 
           const data = await res.json();
 
+          if (data.message === "bad currency pair") {
+            throw new Error("Source and target currencies must be different.");
+          }
+
           setOutput(data.rates[toCurr]);
         } catch (e) {
           console.log(e.message);
@@ -41,7 +45,7 @@ export default function App() {
 
       if (!amount || !fromCurr || !toCurr) return;
 
-      fetchConversion();
+      fromCurr !== toCurr ? fetchConversion() : setOutput(amount);
     },
     [amount, fromCurr, toCurr]
   );
