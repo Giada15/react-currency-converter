@@ -1,4 +1,4 @@
-feat: implement useEffect to fetch conversion rate based on input
+feat: add error handling for identical currencies and conditional fetch logic
 
-Set up useEffect to trigger API request using amount, fromCurrency, and toCurrency.
-Updated state with the converted currency value based on API response.
+- Implemented try/catch block to handle errors when source and target currencies are the same
+- Used a ternary operator to either perform the fetch request or directly set the output to the input amount if currencies are identical
